@@ -20,7 +20,9 @@ struct MissionView: View {
     var body: some View {
         
         GeometryReader { geometry in
+            
             ScrollView {
+            
                 VStack {
                     
                     Image(mission.image)
@@ -29,11 +31,14 @@ struct MissionView: View {
                         .frame(maxWidth: geometry.size.width * 0.6)
                         .padding(.top)
                     
+                    VStack(alignment: .center) {
+                        Text(mission.formattedLaunchDate.capitalized)
+                            .padding(.bottom, 5)
+                    }
+                    
                     VStack(alignment: .leading) {
-                        Rectangle()
-                            .frame(height: 2)
-                            .foregroundColor(.lightBackground)
-                            .padding(.vertical)
+                        
+                        divider()
                         
                         Text("Mission highlights")
                             .font(.title.bold())
@@ -41,10 +46,7 @@ struct MissionView: View {
                         
                         Text(mission.description)
                         
-                        Rectangle()
-                            .frame(height: 2)
-                            .foregroundColor(.lightBackground)
-                            .padding(.vertical)
+                        divider()
                         
                         Text("Crew")
                             .font(.title.bold())
@@ -89,6 +91,13 @@ struct MissionView: View {
         .navigationTitle(mission.displayName)
         .navigationBarTitleDisplayMode(.inline)
         .background(.darkBackground)
+    }
+    
+    func divider() -> some View {
+        Rectangle()
+            .frame(height: 2)
+            .foregroundColor(.lightBackground)
+            .padding(.vertical)
     }
     
     init(mission: Mission, astronauts: [Astronaut]) {
